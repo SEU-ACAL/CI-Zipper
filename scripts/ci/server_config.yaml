@@ -1,13 +1,14 @@
+# config.yaml
+
 # 源代码库路径 (默认填入测试服务器上本仓库的路径)
-source_repo_path: "/home/shiroha/Code/tapeout/CI-Zipper"
+zipper_path: "/home/shiroha/Code/tapeout/CI-Zipper"
 
 # 生成用于测试服务器的代码的输出路径（server）
-join_target_path: "/home/shiroha/Code/tapeout/output"
+project_path: "/home/shiroha/Code/tapeout/output"
 
 # 文件映射关系
 file_mappings:
-file_mappings:
-  - source: "src/npu/"
-    target: "generators/gemmini/"
-  - source: "workload/"
-    target: "workload/"
+  - project: "generators/gemmini/"
+    zipper: "src/npu/"
+  - project: "workload/"
+    zipper: "workload/"

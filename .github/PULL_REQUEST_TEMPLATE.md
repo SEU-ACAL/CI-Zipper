@@ -2,9 +2,9 @@
 规范化 PR 标题。请以 [类别] 开头，描述你的每项改动，用于指定该 PR 进行的修改的类别。
   [FEAT] - 此 PR 添加新功能
   [TEST] - 此 PR 添加测试用例
-  [FIX] - 此 PR 修复BUG
+  [FIX] - 此 PR 修复BUG, 懒得写可以忽略
   [DEL] - 此 PR 删除功能
-  [DOC] - 此 PR 更改文档
+  [DOC] - 此 PR 更改文档, 懒得写可以忽略
   [CI] - 此 PR 更改 CI 流程
   [SYNC] - 此 PR 未修改实质功能性代码(如修改.gitignore)，仅用于同步
 
@@ -16,6 +16,7 @@
     <change:NPU> - 此 PR 更改了 NPU 的实现
     <change:test> - 此 PR 更改了测试代码
 CI 标签:
+    <ci:mini-test> - 此 PR 只需要最小测试
     <ci:fpga-deploy> - 此 PR 需要 FPGA 的测试
     <ci:linux-test> - 此 PR 需要 OS 的测试
     <ci:individual-test> - 此 PR 需要运行已有的测试用例，但不在 CI 流程中()

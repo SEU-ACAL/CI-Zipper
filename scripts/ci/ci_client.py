@@ -21,18 +21,22 @@ def load_config(config_path=None):
             print(f"Error parsing configuration file: {e}")
             sys.exit(1)
 
-def copy_files(source_base, target_base, mappings):
+def copy_files(source_base, target_base, mappings, direction):
     """ 根据映射关系复制文件或目录。"""
     for mapping in mappings:
-        project_path = mapping.get('source')
-        zipper_path = mapping.get('target')
+        project_path = mapping.get('project')
+        zipper_path = mapping.get('zipper')
 
         if not project_path or not zipper_path:
             print(f"Invalid mapping: {mapping}")
             continue
 
-        source = os.path.join(source_base, project_path)
-        target = os.path.join(target_base, zipper_path)
+        if direction == 'project_to_zipper': # separate
+            source = os.path.join(source_base, project_path)
+            target = os.path.join(target_base, zipper_path)
+        elif direction == 'zipper_to_project': # join            
+            source = os.path.join(source_base, zipper_path)
+            target = os.path.join(target_base, project_path)
 
         try:
             if os.path.isdir(source):
@@ -51,8 +55,8 @@ def copy_files(source_base, target_base, mappings):
 
 def separate(config):
     """ 生成用于提交 GitHub 的代码。"""
-    source = config['source_repo_path']
-    target = config['separate_target_path']
+    source = config['project_path']
+    target = config['zipper_path']
     mappings = config.get('file_mappings', [])
 
     if not mappings:
@@ -60,20 +64,33 @@ def separate(config):
         sys.exit(1)
 
     os.makedirs(target, exist_ok=True)
-    copy_files(source, target, mappings)
+    copy_files(source, target, mappings, direction='project_to_zipper')
     print(f"Code has been separated to: {target}")
 
+def join(config):
+    """ 通过Zipper更新本地代码 """
+    source = config['zipper_path']
+    target = config['project_path']
+    mappings = config.get('file_mappings', [])
+
+    if not mappings:
+        print("No file mappings defined.")
+        sys.exit(1)
+
+    os.makedirs(target, exist_ok=True)
+    copy_files(source, target, mappings, direction='zipper_to_project')
+    print(f"Code has been merged to: {target}")
 def main():
-    parser = argparse.ArgumentParser(description="Extract code to extractor")
+    parser = argparse.ArgumentParser(description="Extract code to CI-Zipper")
     parser.add_argument(
         'action',
-        choices=['client-separate'],
-        help="Choose action type: 'client-separate' to extract code for GitHub"
+        choices=['client-separate', 'client-join'],
+        help="Choose action type: 'client-separate' extract project code to Zipper for commit,\n 'client-join' update project from Zipper."
     )
     parser.add_argument(
         '--config',
         default=None,
-        help="Path to configuration file (default: config.yaml)"
+        help="Path to configuration file (default: client_config.yaml)"
     )
 
     args = parser.parse_args()
@@ -81,6 +98,8 @@ def main():
 
     if args.action == 'client-separate':
         separate(config)
+    elif args.action == 'client-join':
+        join(config)
     else:
         print("Invalid action type.")
         sys.exit(1)

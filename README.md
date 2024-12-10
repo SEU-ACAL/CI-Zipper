@@ -26,10 +26,10 @@ python ./scripts/ci/ci_client.py
 ```
 
 4. (仅用于CI测试，开发情况下无需使用) Server端配置`server_config.yaml`：
-- 修改 `source_repo_path` 与 `joint_target_path` 为测试服务器的绝对路径
+- 修改 `source_repo_path` 与 `join_target_path` 为测试服务器的绝对路径
 - 检查 `file_mappings` 的对应关系
 
-5. 运行 `ci_server.py`脚本
+5. (仅用于CI测试，开发情况下无需使用) 运行 `ci_server.py`脚本
 ```
 python ./scripts/ci/ci_server.py
 ```
