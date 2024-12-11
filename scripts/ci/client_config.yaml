@@ -10,5 +10,5 @@
 file_mappings:
   - project: "generators/gemmini/"
     zipper: "src/npu/"
-  - project: "workload/"
-    zipper: "workload/"
+  # - project: "workload/"
+  #   zipper: "workload/"

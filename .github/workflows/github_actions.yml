@@ -3,6 +3,7 @@ run-name: ${{ github.actor }} is running CI Test 🚀
 on: [push]
 jobs:
   Code-Join:
+    name: Code Join
     runs-on: ubuntu-20.04
     steps:
       - name: Print information
@@ -37,7 +38,9 @@ jobs:
           run: echo "🍏 This job is ${{ job.status }}."
 
   Compile-lint:
+    name: Compile Lint
     runs-on: ubuntu-20.04
+    needs: Code-Join
     steps:
       - name: Set up SSH and Conda env
         run: |
@@ -50,7 +53,9 @@ jobs:
       - run: echo "🍏 This test is ${{ job.status }}."
 
   Test-Workloads:
+    name: Test Workloads
     runs-on: ubuntu-20.04
+    needs: Compile-lint
     steps:
       - name: Set up SSH and Conda env
         run: |
@@ -63,6 +68,8 @@ jobs:
       - run: echo "🍏 This test is ${{ job.status }}."
 
   Update-Repository:
+    name: Update Repository:
     runs-on: ubuntu-20.04
+    needs: Test-Workloads
     steps:
       - run: echo "🎉 Good Job! This ${{ github.event_name }} will be updated to ${{ github.ref }}."
