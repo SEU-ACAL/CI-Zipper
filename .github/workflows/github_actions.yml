@@ -38,15 +38,15 @@ jobs:
 
   Compile lint:
     runs-on: ubuntu-20.04
-      steps:
-        - name: Set up SSH and Conda env
+    steps:
+      - name: Set up SSH and Conda env
         run: |
           ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no
           conda_exec
           cd ~/CI-Zipper
-        - name: Build Verilator
-          run: | 
-            ./scripts/build/build_verilator.sh --config CustomGemminiSoCConfig
+      - name: Build Verilator
+        run: | 
+          ./scripts/build/build_verilator.sh --config CustomGemminiSoCConfig
       - run: echo "🍏 This test is ${{ job.status }}."
 
   Test Workloads:
