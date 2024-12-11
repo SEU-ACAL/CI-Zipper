@@ -68,7 +68,7 @@ jobs:
       - run: echo "🍏 This test is ${{ job.status }}."
 
   Update-Repository:
-    name: Update Repository:
+    name: Update Repository
     runs-on: ubuntu-20.04
     needs: Test-Workloads
     steps:
