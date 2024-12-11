@@ -13,17 +13,17 @@ jobs:
       - name: Set up SSH
         run: |
           ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no
-      - name: Set up Conda env
-        run: |
+      # - name: Set up Conda env
+      #   run: |
           source ~/.zshrc
           chipyard_exec
           cd 
-      - name: Echo environment variables
-        run: |
+      # - name: Echo environment variables
+      #   run: |
           echo $CI_PROJECT_PATH
           echo $CI_ZIPPER_PATH
-      - name: Check out repository code
-        run: |
+      # - name: Check out repository code
+      #   run: |
           if [ -d "CI-Zipper" ]; then
             echo "CI-Zipper directory exists. Pulling the latest changes..."
             cd CI-Zipper && git pull
@@ -33,8 +33,8 @@ jobs:
             git clone https://github.com/shirohasuki/Voyager.git .
           fi
           echo $PWD && tree
-      - name: RTL Code join
-        run: |
+      # - name: RTL Code join
+      #   run: |
           ./scripts/ci/ci_server.py server-join
           run: echo "🍏 This job is ${{ job.status }}."
 
