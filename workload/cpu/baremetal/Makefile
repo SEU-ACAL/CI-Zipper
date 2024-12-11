@@ -4,6 +4,7 @@ Verilator=spike
 
 # $(CI_PROJECT_PATH) 是环境变量,表示chipyard的路径
 PROJECT_PATH=$(CI_PROJECT_PATH)
+ZIPPER_PATH=$(CI_ZIPPER_PATH)
 CONFIG=CustomGemminiSoCConfig
 
 BUILD_DIR=$(abspath ./build)
@@ -29,7 +30,7 @@ hello-spike-run: hello-bin
 	@$(SPIKE) $(SPIKE_EXT) $(BUILD_DIR)/$<
 
 hello-verilator-run: hello-bin
-	$(PROJECT_PATH)/sims/verilator/simulator-chipyard.harness-$(CONFIG) +permissive +loadmem=$(BUILD_DIR)/$< +loadmem_addr=80000000 +permissive-off $(BUILD_DIR)/$< 
+	$(ZIPPER_PATH)/sims/verilator/simulator-chipyard.harness-$(CONFIG) +permissive +loadmem=$(BUILD_DIR)/$< +loadmem_addr=80000000 +permissive-off $(BUILD_DIR)/$< 
 
 
 clean:
