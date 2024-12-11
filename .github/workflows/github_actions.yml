@@ -41,6 +41,7 @@ jobs:
           source ~/.zshrc
           chipyard_exec
           cd ~/CI-Zipper
+          sudo chmod +x ./scripts/build/build_verilator.sh
           ./scripts/build/build_verilator.sh --config CustomGemminiSoCConfig
       - run: echo "🍏 This test is ${{ job.status }}."
 
