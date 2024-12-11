@@ -66,6 +66,6 @@ if [ -z "$CONFIG" ]; then
 fi
 
 cd "${PROJECT_PATH}/sims/verilator/" || { echo "无法进入目录 ${PROJECT_PATH}/sims/verilator/"; exit 1; }
-make -j$j ${debug} CONFIG=$CONFIG 
+make -j$j ${debug} CONFIG=$CONFIG || { echo "[编译测试未通过]==============="; exit 1; }
 cp ${PROJECT_PATH}/sims/verilator/simulator-chipyard.harness-${CONFIG}${debug} ${ZIPPER_PATH}/sims/verilator/
 # 编译成功了才会搬过来

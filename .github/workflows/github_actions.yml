@@ -42,7 +42,7 @@ jobs:
           chipyard_exec
           cd ~/CI-Zipper
           sudo chmod +x ./scripts/build/build_verilator.sh
-          ./scripts/build/build_verilator.sh --config CustomGemminiSoCConfig
+          ./scripts/build/build_verilator.sh --config GemminiRocketConfig
       - run: echo "🍏 This test is ${{ job.status }}."
 
   Test-Workloads:
