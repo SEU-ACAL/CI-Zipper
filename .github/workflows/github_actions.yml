@@ -26,8 +26,9 @@ jobs:
             mkdir CI-Zipper && cd CI-Zipper
             git clone https://github.com/shirohasuki/Voyager.git .
           fi
-          echo $PWD && tree
+          echo $PWD
           ./scripts/ci/ci_server.py server-join
+          echo $PWD
           EOF  
       - run: echo "🍏 This job is ${{ job.status }}."
 
