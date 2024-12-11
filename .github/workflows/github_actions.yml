@@ -27,9 +27,7 @@ jobs:
             git clone https://github.com/shirohasuki/Voyager.git .
           fi
           echo $PWD
-          ./scripts/ci/ci_server.py server-join
-          echo $PWD
-          EOF  
+          python ./scripts/ci/ci_server.py server-join
       - run: echo "🍏 This job is ${{ job.status }}."
 
   Compile-lint:
@@ -61,7 +59,7 @@ jobs:
           cd ~/CI-Zipper
       - name: Run mini-test on runner machine
         run: |
-          ./scripts/test.py -cpu ut
+          python ./scripts/test.py -cpu ut
       - run: echo "🍏 This test is ${{ job.status }}."
 
   Update-Repository:
