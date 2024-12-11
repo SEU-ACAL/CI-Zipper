@@ -14,7 +14,7 @@ jobs:
           ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no
       - name: Set up Conda env
         run: |
-          conda_exec
+          chipyard_exec
           cd 
       - name: Echo environment variables
         run: |
@@ -42,7 +42,7 @@ jobs:
       - name: Set up SSH and Conda env
         run: |
           ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no
-          conda_exec
+          chipyard_exec
           cd ~/CI-Zipper
       - name: Build Verilator
         run: | 
@@ -55,7 +55,7 @@ jobs:
       - name: Set up SSH and Conda env
         run: |
           ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no
-          conda_exec
+          chipyard_exec
           cd ~/CI-Zipper
       - name: Run mini-test on runner machine
         run: |
