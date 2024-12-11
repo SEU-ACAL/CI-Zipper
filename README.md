@@ -18,27 +18,28 @@ pre-commit install
 ```
 
 2. Client端配置`client_config.yaml`：
-- 修改 `source_repo_path` 与 `separate_target_path` 为你本地的绝对路径
+- ~~修改 `source_repo_path` 与 `separate_target_path` 为你本地的绝对路径~~
 - 检查 `file_mappings` 的对应关系
 
 3. 运行 `ci_client.py`脚本
 ```
-python ./scripts/ci/ci_client.py
+python ./scripts/ci/ci_client.py client-seperate/client-join
 ```
 
 4. (仅用于CI测试，开发情况下无需使用) Server端配置`server_config.yaml`：
-- 修改 `source_repo_path` 与 `join_target_path` 为测试服务器的绝对路径
+-~~ 修改 `source_repo_path` 与 `join_target_path` 为测试服务器的绝对路径~~
 - 检查 `file_mappings` 的对应关系
 
 5. (仅用于CI测试，开发情况下无需使用) 运行 `ci_server.py`脚本
 ```
-python ./scripts/ci/ci_server.py
+python ./scripts/ci/ci_server.py server-join
 ```
 
 ### Configuration and Commands Explanation
 
 1. `ci_client.py`
    - client-seperate: 分离出要提交的代码
+   - client-join: 合并代码到测试环境
    - --config: 配置文件路径(当你移动了yaml的config文件时，才需要单独指定)
 
 2. `ci_server.py`

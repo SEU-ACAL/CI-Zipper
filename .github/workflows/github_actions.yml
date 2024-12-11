@@ -1,0 +1,68 @@
+name: Voyager CI
+run-name: ${{ github.actor }} is running CI Test 🚀
+on: [push]
+jobs:
+  Code Join:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Print information
+        run: | 
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Set up SSH
+        run: |
+          ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no
+      - name: Set up Conda env
+        run: |
+          conda_exec
+          cd 
+      - name: Echo environment variables
+        run: |
+          echo $CI_PROJECT_PATH
+          echo $CI_ZIPPER_PATH
+      - name: Check out repository code
+        run: |
+          if [ -d "CI-Zipper" ]; then
+            echo "CI-Zipper directory exists. Pulling the latest changes..."
+            cd CI-Zipper && git pull
+          else
+            echo "CI-Zipper directory does not exist. Cloning repository..."
+            mkdir CI-Zipper && cd CI-Zipper
+            git clone https://github.com/shirohasuki/Voyager.git .
+          fi
+          echo $PWD && tree
+      - name: RTL Code join
+        run: |
+          ./scripts/ci/ci_server.py server-join
+          run: echo "🍏 This job is ${{ job.status }}."
+
+  Compile lint:
+    runs-on: ubuntu-20.04
+      steps:
+        - name: Set up SSH and Conda env
+        run: |
+          ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no
+          conda_exec
+          cd ~/CI-Zipper
+        - name: Build Verilator
+          run: | 
+            ./scripts/build/build_verilator.sh --config CustomGemminiSoCConfig
+      - run: echo "🍏 This test is ${{ job.status }}."
+
+  Test Workloads:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Set up SSH and Conda env
+        run: |
+          ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no
+          conda_exec
+          cd ~/CI-Zipper
+      - name: Run mini-test on runner machine
+        run: |
+          ./scripts/test.py -cpu ut
+      - run: echo "🍏 This test is ${{ job.status }}."
+
+  Update Repository 🎉:
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo "🎉 Good Job! This ${{ github.event_name }} will be updated to ${{ github.ref }}."
