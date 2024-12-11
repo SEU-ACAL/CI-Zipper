@@ -62,7 +62,7 @@ jobs:
           ./scripts/test.py -cpu ut
       - run: echo "🍏 This test is ${{ job.status }}."
 
-  Update-Repository 🎉:
+  Update-Repository:
     runs-on: ubuntu-20.04
     steps:
       - run: echo "🎉 Good Job! This ${{ github.event_name }} will be updated to ${{ github.ref }}."
