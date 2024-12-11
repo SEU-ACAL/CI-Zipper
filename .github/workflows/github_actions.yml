@@ -35,7 +35,6 @@ jobs:
         run: |
           ./scripts/ci/ci_server.py server-join
           run: echo "🍏 This job is ${{ job.status }}."
-
   Compile lint:
     runs-on: ubuntu-20.04
     steps:
@@ -48,7 +47,6 @@ jobs:
         run: | 
           ./scripts/build/build_verilator.sh --config CustomGemminiSoCConfig
       - run: echo "🍏 This test is ${{ job.status }}."
-
   Test Workloads:
     runs-on: ubuntu-20.04
     steps:
@@ -61,7 +59,6 @@ jobs:
         run: |
           ./scripts/test.py -cpu ut
       - run: echo "🍏 This test is ${{ job.status }}."
-
   Update Repository 🎉:
     runs-on: ubuntu-20.04
     steps:
