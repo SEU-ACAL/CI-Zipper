@@ -24,15 +24,15 @@ def load_config(config_path=None):
 def copy_files(source_base, target_base, mappings):
     """ 根据映射关系复制文件或目录。"""
     for mapping in mappings:
-        zipper_path = mapping.get('zipper')
-        project_path = mapping.get('project')
+        zipper_file = mapping.get('zipper')
+        project_file = mapping.get('project')
 
-        if not zipper_path or not project_path:
+        if not zipper_file or not project_file:
             print(f"Invalid mapping: {mapping}")
             continue
 
-        source = os.path.join(source_base, zipper_path)
-        target = os.path.join(target_base, project_path)
+        source = os.path.join(source_base, zipper_file)
+        target = os.path.join(target_base, project_file)
 
         try:
             if os.path.isdir(source):
@@ -51,8 +51,8 @@ def copy_files(source_base, target_base, mappings):
 
 def join(config):
     """ 执行代码合并操作。"""
-    source = config['zipper_path']
-    target = config['project_path']
+    source = os.environ.get('CI_ZIPPER_PATH')
+    target = os.environ.get('CI_PROJECT_PATH')
     mappings = config.get('file_mappings', [])
 
     if not mappings:

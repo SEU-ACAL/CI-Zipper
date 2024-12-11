@@ -1,10 +1,10 @@
 # config.yaml
 
 # 源代码库路径 (默认填入本地chipyard路径)
-project_path: "/home/shiroha/Code/tapeout/source"
+# project_path: "/home/shiroha/Code/tapeout/source"
 
 # client上生成用于提交到GitHub的代码的输出路径 (默认填入本仓库的路径)
-zipper_path: "/home/shiroha/Code/tapeout/CI-Zipper"
+# zipper_path: "/home/shiroha/Code/tapeout/CI-Zipper"
 
 # 文件映射关系
 file_mappings:

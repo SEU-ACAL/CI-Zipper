@@ -24,19 +24,19 @@ def load_config(config_path=None):
 def copy_files(source_base, target_base, mappings, direction):
     """ 根据映射关系复制文件或目录。"""
     for mapping in mappings:
-        project_path = mapping.get('project')
-        zipper_path = mapping.get('zipper')
-
-        if not project_path or not zipper_path:
+        project_file = mapping.get('project')
+        zipper_file = mapping.get('zipper')
+        
+        if not project_file or not zipper_file:
             print(f"Invalid mapping: {mapping}")
             continue
 
         if direction == 'project_to_zipper': # separate
-            source = os.path.join(source_base, project_path)
-            target = os.path.join(target_base, zipper_path)
+            source = os.path.join(source_base, project_file)
+            target = os.path.join(target_base, zipper_file)
         elif direction == 'zipper_to_project': # join            
-            source = os.path.join(source_base, zipper_path)
-            target = os.path.join(target_base, project_path)
+            source = os.path.join(source_base, zipper_file)
+            target = os.path.join(target_base, project_file)
 
         try:
             if os.path.isdir(source):
@@ -55,8 +55,8 @@ def copy_files(source_base, target_base, mappings, direction):
 
 def separate(config):
     """ 生成用于提交 GitHub 的代码。"""
-    source = config['project_path']
-    target = config['zipper_path']
+    source = os.environ.get('CI_PROJECT_PATH')
+    target = os.environ.get('CI_ZIPPER_PATH')
     mappings = config.get('file_mappings', [])
 
     if not mappings:
@@ -69,8 +69,8 @@ def separate(config):
 
 def join(config):
     """ 通过Zipper更新本地代码 """
-    source = config['zipper_path']
-    target = config['project_path']
+    source = os.environ.get('CI_ZIPPER_PATH')
+    target = os.environ.get('CI_PROJECT_PATH')
     mappings = config.get('file_mappings', [])
 
     if not mappings:
