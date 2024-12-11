@@ -12,7 +12,7 @@ jobs:
           echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Set up SSH
         run: |
-          ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no
+          ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no << 'EOF'
           source ~/.zshrc
           chipyard_exec
           cd 
@@ -28,7 +28,8 @@ jobs:
           fi
           echo $PWD && tree
           ./scripts/ci/ci_server.py server-join
-          run: echo "🍏 This job is ${{ job.status }}."
+          EOF  
+      - run: echo "🍏 This job is ${{ job.status }}."
 
   Compile-lint:
     name: Compile Lint
