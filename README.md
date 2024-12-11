@@ -14,6 +14,7 @@ CI-Zipper本质是个即插即用的CI小工具，当作一个插件下到`本�
 git clone https://github.com/SEU-ACAL/CI-Zipper.git
 cd CI-Zipper
 pip install -r requirements.txt
+pre-commit install
 ```
 
 2. Client端配置`client_config.yaml`：
