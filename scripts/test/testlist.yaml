@@ -1,0 +1,48 @@
+tests:
+  - name: "hello"
+    labels:
+      - "cpu"
+      - "ut"
+      - "mini-test"
+    folder: "workload/cpu/baremetal"
+    command: "make hello-verilator-run"
+
+  - name: "template"
+    labels:
+      - "npu"
+      - "ut"
+      - "mini-test"
+    folder: "workload/npu/baremetal"
+    command: ""
+
+  - name: "coremark"
+    labels:
+      - "cpu"
+      - "it"
+      - ""
+    folder: "workload/coremark"
+    command: ""
+
+  - name: "transformer"
+    labels:
+      - "npu"
+      - "it"
+      - ""
+    folder: "workload/transformer"
+    command: ""
+
+  - name: "spec06"
+    labels:
+      - "sys"
+      - "st"
+      - ""
+    folder: ""
+    command: ""
+
+  - name: "test"
+    labels:
+      - ""
+      - ""
+      - "local-test"
+    folder: "workload/cpu/baremetal"
+    command: "make hello-spike-run"
