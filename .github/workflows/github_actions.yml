@@ -24,7 +24,7 @@ jobs:
           else
             echo "CI-Zipper directory does not exist. Cloning repository..."
             mkdir CI-Zipper && cd CI-Zipper
-            git clone https://github.com/shirohasuki/Voyager.git .
+            git clone https://github.com/SEU-ACAL/CI-Zipper.git .
           fi
           echo $PWD
           python ./scripts/ci/ci_server.py server-join
