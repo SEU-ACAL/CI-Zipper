@@ -56,7 +56,7 @@ jobs:
           source ~/.zshrc
           chipyard_exec
           cd ~/CI-Zipper
-          python ./scripts/test.py -cpu ut
+          python ./scripts/test/test.py -cpu ut
       - run: echo "🍏 This test is ${{ job.status }}."
 
   Update-Repository:
