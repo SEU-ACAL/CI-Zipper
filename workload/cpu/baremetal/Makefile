@@ -5,7 +5,7 @@ Verilator=spike
 # $(CI_PROJECT_PATH) 是环境变量,表示chipyard的路径
 PROJECT_PATH=$(CI_PROJECT_PATH)
 ZIPPER_PATH=$(CI_ZIPPER_PATH)
-CONFIG=CustomGemminiSoCConfig
+CONFIG=GemminiRocketConfig
 
 BUILD_DIR=$(abspath ./build)
 CSR_PATH=$(abspath ./)
