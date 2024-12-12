@@ -13,7 +13,6 @@ jobs:
       - name: Set up SSH
         run: |
           ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no << 'EOF'
-          source ~/.zshrc
           chipyard_exec
           cd 
           echo $CI_PROJECT_PATH
@@ -38,7 +37,6 @@ jobs:
       - name: Build Verilator
         run: |
           ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no << 'EOF'
-          source ~/.zshrc
           chipyard_exec
           cd ~/CI-Zipper
           sudo chmod +x ./scripts/build/build_verilator.sh
@@ -52,8 +50,7 @@ jobs:
     steps:
       - name: Run mini-test on runner machine
         run: |
-          ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no
-          source ~/.zshrc
+          ssh -p 10000 CI_runner@47.97.107.94 -o StrictHostKeyChecking=no << 'EOF'
           chipyard_exec
           cd ~/CI-Zipper
           python ./scripts/test.py -cpu ut
